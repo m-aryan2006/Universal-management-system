@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Event Manager Pro</title>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <!-- Google Fonts (optional) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container" id="appContainer">
+    <!-- Header Section -->
+    <header class="app-header">
+      <h1>
+        <i class="fas fa-calendar-alt"></i> 
+        Event<span class="logo-light">Pro</span>
+      </h1>
+      <button class="badge-alert" id="todayAlertBtn" aria-label="Check today's events">
+        <i class="fas fa-bell"></i> 
+        <span id="alertBadgeText">Today?</span>
+      </button>
+    </header>
+
+    <!-- Alert Banner -->
+    <div id="alertBanner" class="today-alert" style="display: none;">
+      <i class="fas fa-exclamation-circle"></i>
+      <span id="alertMessage">📅 You have an event today!</span>
+    </div>
+
+    <!-- Event Form -->
+    <section class="event-form" aria-label="Add new event">
+      <div class="form-row">
+        <div class="field">
+          <label for="eventName"><i class="far fa-calendar-plus"></i> Event Name</label>
+          <input type="text" id="eventName" placeholder="e.g. Tech Meetup" value="">
+        </div>
+        <div class="field">
+          <label for="eventLocation"><i class="fas fa-map-pin"></i> Location</label>
+          <input type="text" id="eventLocation" placeholder="Hall 2, NY" value="">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="eventDate"><i class="fas fa-calendar-day"></i> Date</label>
+          <input type="date" id="eventDate" value="2026-06-25">
+        </div>
+        <div class="field">
+          <label for="eventTime"><i class="fas fa-clock"></i> Time</label>
+          <div class="inline-group">
+            <input type="time" id="eventTime" value="18:30" style="flex:2;">
+            <select id="eventAmPm" style="flex:1; padding: 10px 4px;">
+              <option value="AM">AM</option>
+              <option value="PM" selected>PM</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="inchargeName"><i class="fas fa-user-tie"></i> Incharge</label>
+          <input type="text" id="inchargeName" placeholder="John Doe" value="">
+        </div>
+        <div class="field">
+          <label for="inchargePhone"><i class="fas fa-phone-alt"></i> Incharge #</label>
+          <input type="text" id="inchargePhone" placeholder="+1 555 1234" value="">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="volunteerNames"><i class="fas fa-users"></i> Volunteers</label>
+          <input type="text" id="volunteerNames" placeholder="Alice, Bob, Carol" value="">
+        </div>
+        <div class="field">
+          <label for="volunteerPhones"><i class="fas fa-phone"></i> Vol. Numbers</label>
+          <input type="text" id="volunteerPhones" placeholder="+1 111, +1 222" value="">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="payeeAmount"><i class="fas fa-dollar-sign"></i> Payment Amount</label>
+          <input type="text" id="payeeAmount" placeholder="$150.00" value="">
+        </div>
+      </div>
+
+      <button class="btn-add" id="addEventBtn">
+        <i class="fas fa-plus-circle"></i> Add Event
+      </button>
+    </section>
+
+    <!-- Event List -->
+    <div class="event-list-header">
+      <h3><i class="fas fa-list-ul" style="color:#3b7cff; margin-right:6px;"></i> Events</h3>
+      <span id="eventCounter">0</span>
+    </div>
+    
+    <div id="eventListContainer">
+      <div class="empty-message">
+        <i class="far fa-calendar-times"></i>
+        <br>No events yet. Add one!
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-note">
+      <i class="fas fa-mobile-alt"></i> Event Manager Pro &bull; v1.0.0
+    </footer>
+  </div>
+
+  <!-- Custom JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>
