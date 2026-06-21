@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Event Manager Pro</title>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Leaflet CSS for Maps -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container" id="appContainer">
+    
+    <!-- Header -->
+    <header class="app-header">
+      <h1><i class="fas fa-calendar-alt"></i> Event<span class="logo-light">Pro</span></h1>
+      <div style="display:flex; gap:6px; align-items:center;">
+        <!-- Language Selector -->
+        <div class="language-selector">
+          <button class="lang-btn" id="langToggle">
+            <i class="fas fa-globe"></i> <span id="currentLangLabel">EN</span>
+          </button>
+          <div class="lang-dropdown" id="langDropdown">
+            <button class="lang-option active" data-lang="en">🇺🇸 English</button>
+            <button class="lang-option" data-lang="hi">🇮🇳 हिंदी</button>
+            <button class="lang-option" data-lang="es">🇪🇸 Español</button>
+            <button class="lang-option" data-lang="fr">🇫🇷 Français</button>
+            <button class="lang-option" data-lang="de">🇩🇪 Deutsch</button>
+            <button class="lang-option" data-lang="zh">🇨🇳 中文</button>
+            <button class="lang-option" data-lang="ar">🇸🇦 العربية</button>
+            <button class="lang-option" data-lang="ja">🇯🇵 日本語</button>
+          </div>
+        </div>
+        <button class="dark-mode-toggle" id="darkModeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button class="badge-alert" id="todayAlertBtn">
+          <i class="fas fa-bell"></i> <span id="alertBadgeText">Today?</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Alert Banner -->
+    <div id="alertBanner" class="today-alert" style="display:none;">
+      <i class="fas fa-exclamation-circle"></i>
+      <span id="alertMessage">📅 You have an event today!</span>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs">
+      <button class="nav-tab active" data-tab="profile">
+        <i class="fas fa-building"></i> <span>Profile</span>
+      </button>
+      <button class="nav-tab" data-tab="add">
+        <i class="fas fa-plus-circle"></i> <span>Add Event</span>
+      </button>
+      <button class="nav-tab" data-tab="events">
+        <i class="fas fa-list"></i> <span>Events</span> <span id="navEventCount">0</span>
+      </button>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- TAB 1: COMPANY PROFILE -->
+    <!-- ============================================ -->
+    <div id="tab-profile" class="tab-content active">
+      <section class="profile-section">
+        <h3><i class="fas fa-building" style="color:var(--primary-color);"></i> Company Profile</h3>
+        <p style="color:var(--text-muted); font-size:13px; margin-bottom:12px;">Enter your company details for professional invoices</p>
+        
+        <div class="form-row">
+          <div class="field">
+            <label><i class="fas fa-building"></i> Company Name</label>
+            <input type="text" id="companyName" placeholder="Your Company Name">
+          </div>
+          <div class="field">
+            <label><i class="fas fa-user-tie"></i> Owner Name</label>
+            <input type="text" id="ownerName" placeholder="John Doe">
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="field">
+            <label><i class="fas fa-envelope"></i> Company Email</label>
+            <input type="email" id="companyEmail" placeholder="info@company.com">
+          </div>
+          <div class="field">
+            <label><i class="fas fa-phone"></i> Company Phone</label>
+            <input type="text" id="companyPhone" placeholder="+1 555 1234">
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="field">
+            <label><i class="fas fa-location-dot"></i> Company Address</label>
+            <input type="text" id="companyAddress" placeholder="123 Business St, City">
+          </div>
+          <div class="field">
+            <label><i class="fas fa-receipt"></i> GST/Tax Number</label>
+            <input type="text" id="companyGst" placeholder="GST-123456789">
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="field" style="flex:1 0 100%;">
+            <label><i class="fas fa-image"></i> Logo URL (optional)</label>
+            <input type="text" id="companyLogo" placeholder="https://example.com/logo.png">
+          </div>
+        </div>
+        
+        <button class="btn-save-profile" id="saveProfileBtn">
+          <i class="fas fa-save"></i> Save Profile
+        </button>
+      </section>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- TAB 2: ADD EVENT -->
+    <!-- ============================================ -->
+    <div id="tab-add" class="tab-content">
+      <section class="event-form">
+        <h3><i class="fas fa-plus-circle" style="color:var(--primary-color);"></i> Add New Event</h3>
+        
+        <div class="form-row">
+          <div class="field">
+            <label><i class="far fa-calendar-plus"></i> Event Name</label>
+            <input type="text" id="eventName" placeholder="e.g. Tech Meetup">
+          </div>
+          <div class="field">
+            <label><i class="fas fa-user"></i> Booked By</label>
+            <input type="text" id="bookedBy" placeholder="Client/Booker Name">
+          </div>
+        </div>
+
+        <!-- Bookie Number Field -->
+        <div class="form-row">
+          <div class="field">
+            <label><i class="fas fa-phone"></i> Bookie Number</label>
+            <input type="text" id="bookieNumber" placeholder="+1 555 6789">
+          </div>
+          <div class="field">
+            <label><i class="fas fa-map-pin"></i> Venue Name</label>
+            <input type="text" id="eventLocation" placeholder="Hall 2, NY">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label><i class="fas fa-calendar-day"></i> Date</label>
+            <input type="date" id="eventDate">
+          </div>
+          <div class="field">
+            <label><i class="fas fa-clock"></i> Time</label>
+            <div class="inline-group">
+              <input type="time" id="eventTime" style="flex:2;">
+              <select id="eventAmPm" style="flex:1; padding:10px 4px;">
+                <option value="AM">AM</option>
+                <option value="PM" selected>PM</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label><i class="fas fa-user-tie"></i> Incharge</label>
+            <input type="text" id="inchargeName" placeholder="John Doe">
+          </div>
+          <div class="field">
+            <label><i class="fas fa-phone-alt"></i> Incharge #</label>
+            <input type="text" id="inchargePhone" placeholder="+1 555 1234">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label><i class="fas fa-dollar-sign"></i> Amount</label>
+            <input type="text" id="payeeAmount" placeholder="$150.00">
+          </div>
+          <div class="field">
+            <label><i class="fas fa-users"></i> Volunteers</label>
+            <input type="text" id="volunteerNames" placeholder="Alice, Bob, Carol">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label><i class="fas fa-phone"></i> Vol. Numbers</label>
+            <input type="text" id="volunteerPhones" placeholder="+1 111, +1 222">
+          </div>
+          <div class="field" style="flex:1 0 100%;">
+            <label><i class="fas fa-map"></i> Event Address</label>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <input type="text" id="eventAddress" placeholder="Full address or pick from map" style="flex:2; min-width:150px;">
+              <button id="openMapPickerBtn" class="btn-pick-location">
+                <i class="fas fa-map-pin"></i> Pick from Map
+              </button>
+            </div>
+            <div id="miniMapContainer" style="height:180px; margin-top:8px; border-radius:12px; overflow:hidden; border:1px solid var(--border-light);"></div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label><i class="fas fa-flag"></i> Priority</label>
+            <select id="eventPriority">
+              <option value="High">🔴 High</option>
+              <option value="Medium" selected>🟡 Medium</option>
+              <option value="Low">🟢 Low</option>
+            </select>
+          </div>
+          <div class="field">
+            <label><i class="fas fa-tag"></i> Event Type</label>
+            <select id="eventType">
+              <option value="Conference">Conference</option>
+              <option value="Workshop">Workshop</option>
+              <option value="Meeting">Meeting</option>
+              <option value="Party">Party</option>
+              <option value="General" selected>General</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="btn-add" id="addEventBtn">
+          <i class="fas fa-plus-circle"></i> Add Event
+        </button>
+
+        <div class="quick-actions">
+          <button id="quickAddBtn" class="btn-quick"><i class="fas fa-bolt"></i> Quick Add</button>
+          <button id="templateSaveBtn" class="btn-quick"><i class="fas fa-save"></i> Save Template</button>
+          <button id="templateLoadBtn" class="btn-quick"><i class="fas fa-folder-open"></i> Load Template</button>
+          <button id="emergencyBtn" class="btn-quick emergency"><i class="fas fa-shield-alt"></i> Emergency Kit</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- TAB 3: EVENTS LIST -->
+    <!-- ============================================ -->
+    <div id="tab-events" class="tab-content">
+      <div class="events-header">
+        <h3><i class="fas fa-list-ul" style="color:var(--primary-color);"></i> All Events</h3>
+        <span id="eventCounter">0</span>
+      </div>
+      
+      <div id="eventListContainer">
+        <div class="empty-message">
+          <i class="far fa-calendar-times"></i>
+          <br>No events yet. Add one!
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-note">
+      <i class="fas fa-mobile-alt"></i> Event Manager Pro &bull; v3.2.0
+    </footer>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- MAP PICKER MODAL -->
+  <!-- ============================================ -->
+  <div id="mapPickerModal" class="map-modal" style="display:none;">
+    <div class="map-modal-content">
+      <div class="map-modal-header">
+        <h3><i class="fas fa-map-pin"></i> Pick Location on Map</h3>
+        <button class="map-modal-close" id="closeMapPicker"><i class="fas fa-times"></i></button>
+      </div>
+      <div id="mapPickerContainer" style="height:400px; border-radius:12px; overflow:hidden;"></div>
+      <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+        <input type="text" id="pickedAddress" placeholder="Click on map to fetch address" style="flex:2; padding:10px; border:1px solid var(--border-input); border-radius:12px; min-width:150px; background:var(--input-bg); color:var(--text-dark);">
+        <button id="confirmLocationBtn" style="flex:0 0 auto; padding:10px 24px; border:none; border-radius:20px; background:#2ed573; color:white; cursor:pointer; font-weight:600;">
+          <i class="fas fa-check"></i> Confirm
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- LIBRARIES -->
+  <!-- ============================================ -->
+  
+  <!-- Leaflet for Maps -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  
+  <!-- PDF Generation Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  
+  <!-- Custom JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>
