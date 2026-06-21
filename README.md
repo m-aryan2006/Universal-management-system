@@ -6,6 +6,7 @@ Event Manager Pro is a powerful, offline-first event management web application 
 
 🎯 Key Highlights
 <br>
+<br>
 📱 Fully Responsive - Works seamlessly on mobile, tablet, and desktop
 
 🌍 Multi-Language Support - 8 languages including English, Hindi, Spanish, French, German, Chinese, Arabic, and Japanese
@@ -17,9 +18,10 @@ Event Manager Pro is a powerful, offline-first event management web application 
 🌙 Dark Mode - Toggle between light and dark themes
 
 💾 Offline-First - All data stored locally in your browser
-
+<br>
 <br>
 ✨ Features
+<br>
 <br>
 🏢 Company Profile Management
 Save company details (name, owner, email, phone, address)
@@ -30,7 +32,9 @@ Logo URL support for branding
 
 Auto-populates in invoices
 <br>
+<br>
 📅 Event Management
+<br>
 <br>
 Add Events with comprehensive details:
 
@@ -54,7 +58,9 @@ Templates - Save and load event templates
 
 Conflict Detection - Prevents double-booking
 <br>
+<br>
 📄 Professional Invoice Generation
+<br>
 <br>
 Generate PDF invoices with all event details
 
@@ -68,7 +74,9 @@ Multi-page support for long invoices
 
 Download as PDF
 <br>
+<br>
 🗺️ Location & Maps
+<br>
 <br>
 Manual Address Input - Type any address
 
@@ -80,7 +88,10 @@ Mini Map Preview - Shows selected location in form
 
 Event Map View - See event location on map
 <br>
+<br>
 🌍 Multi-Language Support
+<br>
+<br>
 8 Languages supported:
 
 🇺🇸 English
@@ -105,7 +116,9 @@ Saves language preference
 
 All UI elements translated
 <br>
+<br>
 🎨 User Experience
+<br>
 <br>
 Dark Mode - Easy on eyes, toggle anytime
 
@@ -117,7 +130,9 @@ Keyboard Navigation - Enter key support for forms
 
 Loading Indicators - Visual feedback for actions
 <br>
+<br>
 📊 Event List & Management
+<br>
 <br>
 Sort by Priority - High → Medium → Low
 
@@ -137,7 +152,9 @@ Today's Events - Quick view of today's schedule
 
 Event Counter - Total events count
 <br>
+<br>
 🆘 Emergency Kit
+<br>
 <br>
 Store emergency contact numbers
 
@@ -147,7 +164,9 @@ Venue notes
 
 Quick access from any screen
 <br>
+<br>
 💾 Data Persistence
+<br>
 <br>
 LocalStorage - All data saved in browser
 
@@ -161,7 +180,9 @@ Language Preference - Remembered across sessions
 
 Dark Mode Preference - Saved user preference
 <br>
+<br>
 🚀 Installation
+<br>
 <br>
 Option 1: Direct Download
 bash
@@ -183,7 +204,9 @@ live-server
 Option 3: Any Web Server
 Simply upload all files to any web server or open index.html directly in your browser.
 <br>
+<br>
 📂 Project Structure
+<br>
 <br>
 text
 event-manager-pro/
@@ -192,5 +215,6 @@ event-manager-pro/
 ├── app.js              # Application logic with all features
 ├── README.md           # Project documentation
 └── assets/             # (Optional) Images, icons, etc.
+<br>
 <br>
 Authour-ARYAN MOURYA
